@@ -1,0 +1,43 @@
+version: "2"
+services:
+  fpm:
+    build: ./php/
+    container_name: fpm
+    volumes:
+      - /data/www:/var/www
+      - /data/conf/php/user.ini:/usr/local/etc/php/conf.d/user.ini
+    networks:
+      - webnet
+  mysql:
+    build: ./mariadb/
+    container_name: mysql
+    volumes:
+      - /data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - webnet
+  memcached:
+    build: ./memcache/
+    container_name: memcached
+    ports:
+      - "11211:11211"
+    networks:
+      - webnet
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /data/www:/var/www
+      - /data/conf/nginx:/etc/nginx/conf.d
+      - /data/log/nginx:/var/log/nginx
+    depends_on:
+      - fpm
+    networks:
+      - webnet
+networks:
+  webnet:
+    driver: bridge
