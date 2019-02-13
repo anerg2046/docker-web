@@ -8,6 +8,11 @@ services:
       - /data/conf/php/user.ini:/usr/local/etc/php/conf.d/user.ini
     networks:
       - webnet
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   mysql:
     build: ./mariadb/
     container_name: mysql
@@ -17,6 +22,11 @@ services:
       - "3306:3306"
     networks:
       - webnet
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   memcached:
     build: ./memcache/
     container_name: memcached
@@ -24,8 +34,13 @@ services:
       - "11211:11211"
     networks:
       - webnet
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   nginx:
-    image: nginx:alpine
+    build: ./nginx/
     container_name: nginx
     ports:
       - "80:80"
@@ -38,6 +53,11 @@ services:
       - fpm
     networks:
       - webnet
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
 networks:
   webnet:
     driver: bridge
