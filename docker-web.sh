@@ -19,7 +19,10 @@ elif [ "$COMMAND" == "stop" ]; then
 elif [ "$COMMAND" == "build" ]; then
     docker-compose -p web stop
     docker-compose -p web up --build -d
-    docker rmi $(docker images | grep "none" | awk '{print $3}')
+    # docker rmi $(docker images | grep "none" | awk '{print $3}')
+    docker ps -a | grep "Exited" | awk '{print $1}' | xargs docker stop
+    docker ps -a | grep "Exited" | awk '{print $1}' | xargs docker rm
+    docker images | grep "none" | awk '{print $3}' | xargs docker rmi
 else
     echo "useage: docker-web start|stop|build"
 fi
