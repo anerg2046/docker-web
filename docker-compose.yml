@@ -68,7 +68,7 @@ services:
     volumes:
       - /data/www:/var/www
       - /data/log/nginx:/var/log/nginx
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - fpm
     networks:
