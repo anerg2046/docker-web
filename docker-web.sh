@@ -8,7 +8,7 @@ while [ -h "$SOURCE"  ]; do
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
-echo 'HOST_IP=' > .env
+echo -n 'HOST_IP='ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+' > .env
 ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+' >> .env
 
 cd $DIR
