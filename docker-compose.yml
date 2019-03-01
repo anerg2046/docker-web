@@ -3,6 +3,7 @@ services:
   fpm:
     build: ./php/
     container_name: fpm
+    restart: always
     volumes:
       - /data/www:/var/www
       - /data/conf/php/user.ini:/usr/local/etc/php/conf.d/user.ini
@@ -16,6 +17,7 @@ services:
   mysql:
     build: ./mariadb/
     container_name: mysql
+    restart: always
     volumes:
       - /data/mysql:/var/lib/mysql
     ports:
@@ -42,11 +44,13 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
+    restart: always
     ports:
       - "6379:6379"
     volumes:
       - /data/redis:/data
-      - /data/conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - /data/conf/redis/redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
     networks:
       - webnet
     ulimits:
@@ -57,6 +61,7 @@ services:
   nginx:
     build: ./nginx/
     container_name: nginx
+    restart: always
     ports:
       - "80:80"
       - "443:443"
