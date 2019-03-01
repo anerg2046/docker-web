@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:latest
 
 # Configurations.
 ENV MEMCACHED_MEMORY 128

@@ -65,6 +65,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    extra_hosts:
+      - "dockerhost:${HOST_IP}"
     volumes:
       - /data/www:/var/www
       - /data/log/nginx:/var/log/nginx

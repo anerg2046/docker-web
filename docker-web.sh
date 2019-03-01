@@ -7,6 +7,10 @@ while [ -h "$SOURCE"  ]; do
     [[ $SOURCE != /*  ]] && SOURCE="$DIR/$SOURCE"
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
+
+echo 'HOST_IP=' > .env
+ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+' >> .env
+
 cd $DIR
 if [ "$COMMAND" == "start" ]; then
     docker-compose -p web up -d
