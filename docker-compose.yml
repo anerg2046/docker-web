@@ -29,18 +29,18 @@ services:
       nofile:
         soft: 65535
         hard: 65535
-  # memcached:
-  #   build: ./memcache/
-  #   container_name: memcached
-  #   ports:
-  #     - "11211:11211"
-  #   networks:
-  #     - webnet
-  #   ulimits:
-  #     nproc: 65535
-  #     nofile:
-  #       soft: 65535
-  #       hard: 65535
+  memcached:
+    build: ./memcache/
+    container_name: memcached
+    ports:
+      - "11211:11211"
+    networks:
+      - webnet
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   redis:
     image: redis:alpine
     container_name: redis

@@ -17,6 +17,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libpng-dev \
     libmemcached-dev \
     libmcrypt-dev \
+    # 安装composer
+    curl -sS https://getcomposer.org/installer | php \
+    mv composer.phar /usr/local/bin/composer \
+    composer config -g repo.packagist composer https://packagist.laravel-china.org \
     # opencc 依赖
     gcc \
     cmake \
