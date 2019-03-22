@@ -41,23 +41,23 @@ services:
       nofile:
         soft: 65535
         hard: 65535
-  redis:
-    image: redis:alpine
-    container_name: redis
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - /data/redis:/data
-      - ./redis/redis.conf:/etc/redis/redis.conf
-    command: redis-server /etc/redis/redis.conf
-    networks:
-      - webnet
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 65535
-        hard: 65535
+  # redis:
+  #   image: redis:alpine
+  #   container_name: redis
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /data/redis:/data
+  #     - ./redis/redis.conf:/etc/redis/redis.conf
+  #   command: redis-server /etc/redis/redis.conf
+  #   networks:
+  #     - webnet
+  #   ulimits:
+  #     nproc: 65535
+  #     nofile:
+  #       soft: 65535
+  #       hard: 65535
   nginx:
     build: ./nginx/
     container_name: nginx
