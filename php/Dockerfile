@@ -17,10 +17,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libpng-dev \
     libmemcached-dev \
     libmcrypt-dev \
-    # 安装composer
-    curl -sS https://getcomposer.org/installer | php \
-    mv composer.phar /usr/local/bin/composer \
-    composer config -g repo.packagist composer https://packagist.laravel-china.org \
     # opencc 依赖
     gcc \
     cmake \
@@ -53,6 +49,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && pecl install redis-4.2.0 \
     && docker-php-ext-enable redis \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    # 安装composer
+    && curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer config -g repo.packagist composer https://packagist.laravel-china.org \
+    # 删除不必要的东西
     && apk del .build-deps \
     && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/* /usr/src/* /usr/share/opencc/doc/* \
     && docker-php-source delete
