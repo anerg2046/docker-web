@@ -7,7 +7,7 @@ if [ ! -f "/var/lib/mysql/ibdata1" ]; then
 	chown -R mysql.mysql /var/lib/mysql /run/mysqld
 fi
 
-MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-"@NErG360113"}
+MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-"your pass"}
 MYSQL_DATABASE=${MYSQL_DATABASE:-""}
 MYSQL_USER=${MYSQL_USER:-""}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
